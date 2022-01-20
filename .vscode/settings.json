@@ -23,6 +23,9 @@
     "string_view": "cpp",
     "initializer_list": "cpp",
     "utility": "cpp",
-    "*.inc": "cpp"
+    "*.inc": "cpp",
+    "*.tcc": "cpp",
+    "ostream": "cpp",
+    "sstream": "cpp"
   }
 }

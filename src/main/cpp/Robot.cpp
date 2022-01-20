@@ -40,10 +40,8 @@ void Robot::RobotPeriodic()
      * an object is the more light from the surroundings will bleed into the 
      * measurements and make it difficult to accurately determine its color.
      */
-  frc::Color detectedColor = m_colorSensor.GetColor();
+  frc::Color detectedColor = m_colorSensor.getColor();
 
-  double proximity = m_colorSensor.GetProximity();
-  frc::SmartDashboard::PutNumber("Proximity", proximity);
   /**
      * Open Smart Dashboard or Shuffleboard to see the color detected by the 
      * sensor.
@@ -52,7 +50,7 @@ void Robot::RobotPeriodic()
   frc::SmartDashboard::PutNumber("Green", detectedColor.green);
   frc::SmartDashboard::PutNumber("Blue", detectedColor.blue);
 
-  double IR = m_colorSensor.GetIR();
+  double IR = m_colorSensor.getIR();
   frc::SmartDashboard::PutNumber("IR", IR);
 
   double confidence = 0.0;

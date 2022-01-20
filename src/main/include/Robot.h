@@ -8,8 +8,9 @@
 
 #include <frc/TimedRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
-#include "rev/ColorSensorV3.h"
 #include "lib/colorMatch.h"
+#include "rev/ColorSensorV3.h"
+#include "lib/colorSensor.h"
 
 class Robot : public frc::TimedRobot
 {
@@ -31,8 +32,8 @@ private:
   const std::string kAutoNameCustom = "My Auto";
   std::string m_autoSelected;
 
-  static constexpr auto i2cPort = frc::I2C::Port::kOnboard;
-  rev::ColorSensorV3 m_colorSensor{i2cPort};
+  CustomColorSensor m_colorSensor = CustomColorSensor(0x01);
+
   ColorMatch m_colorMatcher;
 
   static constexpr CustomColor kGaffer = CustomColor(0.255, 0.476, 0.268, 12);

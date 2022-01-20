@@ -26,7 +26,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "lib/ColorMatch.h"
+#include "lib/colorMatch.h"
 
 #include <algorithm>
 #include <cmath>
