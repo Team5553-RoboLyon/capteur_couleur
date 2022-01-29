@@ -10,7 +10,9 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include "lib/colorMatch.h"
 #include "rev/ColorSensorV3.h"
-#include "lib/colorSensor.h"
+#include "lib/customColorSensor.h"
+#include "lib/ColorSensorMultiplexer.h"
+#include <frc/Timer.h>
 
 class Robot : public frc::TimedRobot
 {
@@ -32,7 +34,9 @@ private:
   const std::string kAutoNameCustom = "My Auto";
   std::string m_autoSelected;
 
-  CustomColorSensor m_colorSensor = CustomColorSensor(0x01);
+  // CustomColorSensor m_colorSensor2 = CustomColorSensor(2);
+  // CustomColorSensor m_colorSensor3 = CustomColorSensor(3);
+  ColorSensorMultiplexer m_colorSensorMultiplexer;
 
   ColorMatch m_colorMatcher;
 
@@ -40,4 +44,7 @@ private:
   static constexpr CustomColor kCarpet = CustomColor(0.250, 0.470, 0.270, 28);
   static constexpr CustomColor kredBall = CustomColor(0.412, 0.410, 0.200, 35);
   static constexpr CustomColor kblueBall = CustomColor(0.191, 0.437, 0.367, 27);
+
+  frc::Timer m_timer;
+  double last_time;
 };
