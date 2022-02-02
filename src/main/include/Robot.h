@@ -42,8 +42,6 @@ private:
 
   static constexpr CustomColor kGaffer = CustomColor(0.255, 0.476, 0.268, 12);
   static constexpr CustomColor kCarpet = CustomColor(0.250, 0.470, 0.270, 28);
-  static constexpr CustomColor kredBall = CustomColor(0.412, 0.410, 0.200, 35);
-  static constexpr CustomColor kblueBall = CustomColor(0.191, 0.437, 0.367, 27);
 
   frc::Timer m_timer;
   double last_time;

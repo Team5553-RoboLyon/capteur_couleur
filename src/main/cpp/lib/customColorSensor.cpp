@@ -24,11 +24,17 @@ frc::Color CustomColorSensor::GetColor()
     return couleur;
 }
 
+double CustomColorSensor::GetProximity(){
+    m_i2cMultiplexer.Write(0x70, 1 << m_addressOnMultiplexer);
+    double proximity = m_colorSensor->GetProximity();
+    m_i2cMultiplexer.Write(0x70, 1 << 0);
+    return proximity;
+}
+
 double CustomColorSensor::GetIR()
 {
     m_i2cMultiplexer.Write(0x70, 1 << m_addressOnMultiplexer);
     double ir = m_colorSensor->GetIR();
     m_i2cMultiplexer.Write(0x70, 1 << 0);
-
     return ir;
 }

@@ -7,6 +7,7 @@ public:
     ~CustomColorSensor();
     frc::Color GetColor();
     double GetIR();
+    double GetProximity();
 
 private:
     frc::I2C m_i2cMultiplexer = frc::I2C(frc::I2C::Port::kOnboard, 0x70);

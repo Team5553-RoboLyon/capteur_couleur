@@ -16,8 +16,8 @@ void Robot::RobotInit()
 
   m_colorMatcher.AddColorMatch(kCarpet);
   m_colorMatcher.AddColorMatch(kGaffer);
-  m_colorMatcher.AddColorMatch(kredBall);
-  m_colorMatcher.AddColorMatch(kblueBall);
+  // m_colorMatcher.AddColorMatch(kredBall);
+  // m_colorMatcher.AddColorMatch(kblueBall);
 
   // m_timer.Start();
   // last_time = m_timer.Get();
