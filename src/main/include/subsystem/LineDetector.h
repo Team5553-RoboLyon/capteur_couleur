@@ -4,9 +4,11 @@
 
 #pragma once
 
+#include <frc/smartdashboard/SmartDashboard.h>
+
 #include "lib/customColorSensor.h"
 #include "lib/colorMatch.h"
-#include "constant.h"
+#include "Constant.h"
 class LineDetector
 {
 public:
@@ -14,9 +16,10 @@ public:
   bool isOnLine();
   bool isLeftOnLine();
   bool isRightOnLine();
+  void mesureColor();
 
 private:
-  CustomColorSensor m_leftColorSensor = CustomColorSensor(LEFT_LINE_COLOR_SENSOR);
+  // CustomColorSensor m_leftColorSensor = CustomColorSensor(LEFT_LINE_COLOR_SENSOR);
   CustomColorSensor m_rightColorSensor = CustomColorSensor(RIGHT_LINE_COLOR_SENSOR);
   ColorMatch m_colorMatcher;
   static constexpr CustomColor kGaffer = CustomColor(0.255, 0.476, 0.268, 12);

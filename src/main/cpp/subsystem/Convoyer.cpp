@@ -16,14 +16,14 @@ bool Convoyer::isBall()
 }
 int Convoyer::ballType()
 {
-    frc::Color detectedLeftColor1 = m_leftColorSensor.GetColor();
+    frc::Color detectedLeftColor = m_leftColorSensor.GetColor();
     frc::Color detectedRightColor = m_rightColorSensor.GetColor();
     double leftIR = m_leftColorSensor.GetIR();
     double rightIR = m_rightColorSensor.GetIR();
 
     double leftConfidence;
     double rightConfidence;
-    CustomColor leftMatchedColor = m_colorMatcher.MatchClosestColor(CustomColor(detectedLeftColor1.red, detectedLeftColor1.green, detectedLeftColor1.blue, leftIR), leftConfidence);
+    CustomColor leftMatchedColor = m_colorMatcher.MatchClosestColor(CustomColor(detectedLeftColor.red, detectedLeftColor.green, detectedLeftColor.blue, leftIR), leftConfidence);
     CustomColor rightMatchedColor = m_colorMatcher.MatchClosestColor(CustomColor(detectedRightColor.red, detectedRightColor.green, detectedRightColor.blue, rightIR), rightConfidence);
     if (leftMatchedColor == rightMatchedColor)
     {
@@ -36,8 +36,5 @@ int Convoyer::ballType()
             return 1;
         }
     }
-    else
-    {
-        return -1;
-    }
+    return -1;
 }

@@ -13,14 +13,6 @@ void Robot::RobotInit()
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
-
-  m_colorMatcher.AddColorMatch(kCarpet);
-  m_colorMatcher.AddColorMatch(kGaffer);
-  // m_colorMatcher.AddColorMatch(kredBall);
-  // m_colorMatcher.AddColorMatch(kblueBall);
-
-  // m_timer.Start();
-  // last_time = m_timer.Get();
 }
 
 /**
@@ -33,49 +25,22 @@ void Robot::RobotInit()
  */
 void Robot::RobotPeriodic()
 {
+  frc::Color detectedColor = m_colorSensor.GetColor();
 
-  // frc::Color detectedColor = m_colorSensor2.GetColor();
-  frc::Color detectedColor = m_colorSensorMultiplexer.GetColor(2);
+  /**
+   * The sensor returns a raw IR value of the infrared light detected.
+   */
+  double IR = m_colorSensor.GetIR();
 
-  frc::SmartDashboard::PutNumber("Red 2 ", detectedColor.red);
-  frc::SmartDashboard::PutNumber("Green 2 ", detectedColor.green);
-  frc::SmartDashboard::PutNumber("Blue 2 ", detectedColor.blue);
-
-  // double IR = m_colorSensor2.GetIR();
-  double IR = m_colorSensorMultiplexer.GetIR(2);
-
-  frc::SmartDashboard::PutNumber("IR 2 ", IR);
-
-  // detectedColor = m_colorSensor3.GetColor();
-  detectedColor = m_colorSensorMultiplexer.GetColor(3);
-  frc::SmartDashboard::PutNumber("Red 3 ", detectedColor.red);
-  frc::SmartDashboard::PutNumber("Green 3 ", detectedColor.green);
-  frc::SmartDashboard::PutNumber("Blue 3 ", detectedColor.blue);
-
-  // IR = m_colorSensor3.GetIR();
-  IR = m_colorSensorMultiplexer.GetIR(3);
-  frc::SmartDashboard::PutNumber("IR 3 ", IR);
-
-  // double confidence = 0.0;
-
-  // CustomColor matchedColor = m_colorMatcher.MatchClosestColor(CustomColor(detectedColor.red, detectedColor.green, detectedColor.blue, IR), confidence);
-  // if (matchedColor == kGaffer)
-  // {
-  //   frc::SmartDashboard::PutString("Detected Color", "Gaffer");
-  // }
-  // else if (matchedColor == kCarpet)
-  // {
-  //   frc::SmartDashboard::PutString("Detected Color", "Carpet");
-  // }
-  // else if (matchedColor == kredBall)
-  // {
-  //   frc::SmartDashboard::PutString("Detected Color", "Red Ball");
-  // }
-  // else if (matchedColor == kblueBall)
-  // {
-  //   frc::SmartDashboard::PutString("Detected Color", "Blue Ball");
-  // }
-  // frc::SmartDashboard::PutNumber("Confidence", confidence);
+  /**
+   * Open Smart Dashboard or Shuffleboard to see the color detected by the
+   * sensor.
+   */
+  frc::SmartDashboard::PutNumber("Red", detectedColor.red);
+  frc::SmartDashboard::PutNumber("Green", detectedColor.green);
+  frc::SmartDashboard::PutNumber("Blue", detectedColor.blue);
+  frc::SmartDashboard::PutNumber("IR", IR);
+  // lineDetector.mesureColor();
 }
 
 void Robot::AutonomousInit()

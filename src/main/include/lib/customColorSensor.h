@@ -1,4 +1,7 @@
+#pragma once
+
 #include "rev/ColorSensorV3.h"
+#include "subsystem/Multiplexer.h"
 
 class CustomColorSensor
 {
@@ -10,9 +13,6 @@ public:
     double GetProximity();
 
 private:
-    frc::I2C m_i2cMultiplexer = frc::I2C(frc::I2C::Port::kOnboard, 0x70);
-
+    Multiplexer *m_multiplexer;
     rev::ColorSensorV3 *m_colorSensor;
-
-    int m_addressOnMultiplexer;
 };
