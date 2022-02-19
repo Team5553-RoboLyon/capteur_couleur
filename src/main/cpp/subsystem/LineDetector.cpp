@@ -57,6 +57,7 @@ void LineDetector::position(/*drivetrain*/)
         }
         else
         {
+            oneLineCount = 0;
             state = States::line_reached;
             frc::SmartDashboard::PutString("action", "arrive");
         }
@@ -72,6 +73,7 @@ void LineDetector::position(/*drivetrain*/)
         }
         else
         {
+            oneLineCount = 0;
             state = States::line_reached;
         }
         break;
