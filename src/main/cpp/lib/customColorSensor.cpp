@@ -3,13 +3,9 @@
 
 CustomColorSensor::CustomColorSensor(int address)
 {
-    std::cout << "multiplexer definition : " << address << std::endl;
     m_multiplexer = new Multiplexer(address);
-    std::cout << "multiplexer created" << std::endl;
     m_multiplexer->SetPosition();
-    std::cout << "position seted" << std::endl;
-    // m_colorSensor = new rev::ColorSensorV3{frc::I2C::Port::kOnboard};
-    std::cout << "color sensor created" << std::endl;
+    m_colorSensor = new rev::ColorSensorV3{frc::I2C::Port::kMXP};
     m_multiplexer->ResetPosition();
 }
 

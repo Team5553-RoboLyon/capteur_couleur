@@ -13,6 +13,7 @@ void Robot::RobotInit()
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+  lineDetector.autoPositionMode(true);
 }
 
 /**
@@ -25,22 +26,7 @@ void Robot::RobotInit()
  */
 void Robot::RobotPeriodic()
 {
-  frc::Color detectedColor = m_colorSensor.GetColor();
-
-  /**
-   * The sensor returns a raw IR value of the infrared light detected.
-   */
-  double IR = m_colorSensor.GetIR();
-
-  /**
-   * Open Smart Dashboard or Shuffleboard to see the color detected by the
-   * sensor.
-   */
-  frc::SmartDashboard::PutNumber("Red", detectedColor.red);
-  frc::SmartDashboard::PutNumber("Green", detectedColor.green);
-  frc::SmartDashboard::PutNumber("Blue", detectedColor.blue);
-  frc::SmartDashboard::PutNumber("IR", IR);
-  // lineDetector.mesureColor();
+  lineDetector.position();
 }
 
 void Robot::AutonomousInit()

@@ -12,11 +12,11 @@ bool LineDetector::isOnLine()
 }
 bool LineDetector::isLeftOnLine()
 {
-    // frc::Color detectedColor = m_leftColorSensor.GetColor();
-    // double IR = m_leftColorSensor.GetIR();
-    // double confidence;
-    // CustomColor matchedColor = m_colorMatcher.MatchClosestColor(CustomColor(detectedColor.red, detectedColor.green, detectedColor.blue, IR), confidence);
-    // return matchedColor == kGaffer;
+    frc::Color detectedColor = m_leftColorSensor.GetColor();
+    double IR = m_leftColorSensor.GetIR();
+    double confidence;
+    CustomColor matchedColor = m_colorMatcher.MatchClosestColor(CustomColor(detectedColor.red, detectedColor.green, detectedColor.blue, IR), confidence);
+    return matchedColor == kGaffer;
 }
 bool LineDetector::isRightOnLine()
 {
@@ -27,23 +27,68 @@ bool LineDetector::isRightOnLine()
     return matchedColor == kGaffer;
 }
 
-void LineDetector::mesureColor()
+void LineDetector::position(/*drivetrain*/)
 {
-    frc::Color detectedColor = m_rightColorSensor.GetColor();
+    switch (state)
+    {
+    case States::tape_approach:
+        if (!isLeftOnLine() && !isRightOnLine())
+        {
+            frc::SmartDashboard::PutString("action", "avance");
+        }
+        else if (isLeftOnLine())
+        {
+            state = States::left_reached;
+        }
+        else if (isRightOnLine())
+        {
+            state = States::right_reached;
+        }
+        break;
 
-    frc::SmartDashboard::PutNumber("Red 2 ", detectedColor.red);
-    frc::SmartDashboard::PutNumber("Green 2 ", detectedColor.green);
-    frc::SmartDashboard::PutNumber("Blue 2 ", detectedColor.blue);
+    case States::left_reached:
+        if (!isLeftOnLine())
+        {
+            frc::SmartDashboard::PutString("action", "avance la droite");
+        }
+        else if (!isRightOnLine())
+        {
+            frc::SmartDashboard::PutString("action", "avance la gauche");
+        }
+        else
+        {
+            state = States::line_reached;
+            frc::SmartDashboard::PutString("action", "arrive");
+        }
+        break;
+    case States::right_reached:
+        if (!isRightOnLine())
+        {
+            frc::SmartDashboard::PutString("action", "avance la gauche");
+        }
+        else if (!isLeftOnLine())
+        {
+            frc::SmartDashboard::PutString("action", "avance la droite");
+        }
+        else
+        {
+            state = States::line_reached;
+        }
+        break;
 
-    double IR = m_rightColorSensor.GetIR();
+    case States::line_reached:
+        oneLineCount++;
+        if (oneLineCount > 20)
+        {
+            state = States::surely_on_line;
+            frc::SmartDashboard::PutString("action", "arrive");
+        }
+    default:
+        break;
+    }
+}
 
-    frc::SmartDashboard::PutNumber("IR 2 ", IR);
-
-    detectedColor = m_rightColorSensor.GetColor();
-    frc::SmartDashboard::PutNumber("Red 3 ", detectedColor.red);
-    frc::SmartDashboard::PutNumber("Green 3 ", detectedColor.green);
-    frc::SmartDashboard::PutNumber("Blue 3 ", detectedColor.blue);
-
-    IR = m_rightColorSensor.GetIR();
-    frc::SmartDashboard::PutNumber("IR 3 ", IR);
+void LineDetector::autoPositionMode(bool newMode)
+{
+    state = States::tape_approach;
 }

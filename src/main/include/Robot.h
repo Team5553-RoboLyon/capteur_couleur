@@ -8,9 +8,8 @@
 
 #include <frc/TimedRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
-// #include "subsystem/LineDetector.h"
-#include "rev/ColorSensorV3.h"
-#include "subsystem/Multiplexer.h"
+#include "subsystem/LineDetector.h"
+#include "lib/customColorSensor.h"
 #include <frc/Timer.h>
 
 class Robot : public frc::TimedRobot
@@ -33,9 +32,5 @@ private:
   const std::string kAutoNameCustom = "My Auto";
   std::string m_autoSelected;
 
-  // LineDetector lineDetector;
-  // Multiplexer multiplexer{12};
-  // frc::I2C m_i2cMultiplexer = frc::I2C(frc::I2C::Port::kOnboard, 0x70);
-  static constexpr auto i2cPort = frc::I2C::Port::kOnboard;
-  rev::ColorSensorV3 m_colorSensor = rev::ColorSensorV3{i2cPort};
+  LineDetector lineDetector;
 };
