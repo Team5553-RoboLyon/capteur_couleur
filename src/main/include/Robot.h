@@ -11,6 +11,7 @@
 #include "subsystem/LineDetector.h"
 #include "lib/customColorSensor.h"
 #include <frc/Timer.h>
+#include <frc/Joystick.h>
 
 class Robot : public frc::TimedRobot
 {
@@ -33,4 +34,5 @@ private:
   std::string m_autoSelected;
 
   LineDetector lineDetector;
+  frc::Joystick m_joystick{0};
 };

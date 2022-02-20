@@ -9,6 +9,7 @@
 #include "lib/customColorSensor.h"
 #include "lib/colorMatch.h"
 #include "Constant.h"
+#include <rev/CANSparkMax.h>
 
 enum States
 {
@@ -29,13 +30,17 @@ public:
   bool isRightOnLine();
   void position();
   void autoPositionMode(bool newMode);
-
-private:
   CustomColorSensor m_leftColorSensor = CustomColorSensor(LEFT_LINE_COLOR_SENSOR);
   CustomColorSensor m_rightColorSensor = CustomColorSensor(RIGHT_LINE_COLOR_SENSOR);
+
+private:
   ColorMatch m_colorMatcher;
-  static constexpr CustomColor kGaffer = CustomColor(0.252454969618056, 0.486187274639423, 0.261445545014881, 10.8);
-  static constexpr CustomColor kCarpet = CustomColor(0.250, 0.470, 0.270, 28);
+  static constexpr CustomColor kGaffer = CustomColor(0.2559814453125, 0.4898681640625, 0.2545166015625, 4.8);
+  static constexpr CustomColor kCarpet = CustomColor(0.2811279296875, 0.4918212890625, 0.2269287109375, 7);
   int oneLineCount = 0;
   States state = States::do_nothing;
+  rev::CANSparkMax m_leftMotor{3, rev::CANSparkMax::MotorType::kBrushless};
+  rev::CANSparkMax m_leftMotorFollower{4, rev::CANSparkMax::MotorType::kBrushless};
+  rev::CANSparkMax m_rightMotor{1, rev::CANSparkMax::MotorType::kBrushless};
+  rev::CANSparkMax m_rightMotorFollower{2, rev::CANSparkMax::MotorType::kBrushless};
 };

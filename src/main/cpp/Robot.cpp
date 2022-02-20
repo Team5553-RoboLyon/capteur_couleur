@@ -13,7 +13,6 @@ void Robot::RobotInit()
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
-  lineDetector.autoPositionMode(true);
 }
 
 /**
@@ -26,7 +25,9 @@ void Robot::RobotInit()
  */
 void Robot::RobotPeriodic()
 {
-  lineDetector.position();
+  frc::SmartDashboard::PutBoolean("is left on line", lineDetector.isLeftOnLine());
+  frc::SmartDashboard::PutBoolean("is right on line", lineDetector.isRightOnLine());
+  frc::SmartDashboard::PutBoolean("is on line", lineDetector.isOnLine());
 }
 
 void Robot::AutonomousInit()
@@ -58,17 +59,31 @@ void Robot::AutonomousPeriodic()
   }
 }
 
-void Robot::TeleopInit() {}
+void Robot::TeleopInit()
+{
+  lineDetector.autoPositionMode(false);
+}
 
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopPeriodic()
+{
+  if (m_joystick.GetRawButtonPressed(1))
+    lineDetector.autoPositionMode(true);
+  if (m_joystick.GetRawButtonReleased(1))
+    lineDetector.autoPositionMode(false);
+  lineDetector.position();
+}
 
 void Robot::DisabledInit() {}
 
 void Robot::DisabledPeriodic() {}
 
-void Robot::TestInit() {}
+void Robot::TestInit()
+{
+}
 
-void Robot::TestPeriodic() {}
+void Robot::TestPeriodic()
+{
+}
 
 #ifndef RUNNING_FRC_TESTS
 int main()

@@ -13,14 +13,14 @@ CustomColorSensor::~CustomColorSensor()
 {
     m_multiplexer->SetPosition();
     delete m_colorSensor;
-    m_multiplexer->ResetPosition();
+    // m_multiplexer->ResetPosition();
 }
 
 frc::Color CustomColorSensor::GetColor()
 {
     m_multiplexer->SetPosition();
     frc::Color couleur = m_colorSensor->GetColor();
-    m_multiplexer->ResetPosition();
+    // m_multiplexer->ResetPosition();
     return couleur;
 }
 
@@ -28,7 +28,7 @@ double CustomColorSensor::GetProximity()
 {
     m_multiplexer->SetPosition();
     double proximity = m_colorSensor->GetProximity();
-    m_multiplexer->ResetPosition();
+    // m_multiplexer->ResetPosition();
     return proximity;
 }
 
@@ -36,6 +36,6 @@ double CustomColorSensor::GetIR()
 {
     m_multiplexer->SetPosition();
     double ir = m_colorSensor->GetIR();
-    m_multiplexer->ResetPosition();
+    // m_multiplexer->ResetPosition();
     return ir;
 }

@@ -17,6 +17,15 @@
   "C_Cpp.default.configurationProvider": "vscode-wpilib",
   "files.associations": {
     "iostream": "cpp",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "*.inc": "cpp",
+    "*.tcc": "cpp",
+    "list": "cpp",
+    "unordered_map": "cpp",
+    "unordered_set": "cpp",
+    "fstream": "cpp",
+    "istream": "cpp",
+    "streambuf": "cpp",
+    "functional": "cpp"
   }
 }
